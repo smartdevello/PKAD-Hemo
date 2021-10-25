@@ -7,6 +7,8 @@ namespace PKAD_Hemo
 {
     public class HemoData
     {
+
+        //Version 2.4
         [Name("ID")]
         public int id { get; set; }
 
