@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "FL6pzy3a0ydej2A/4uI2TT4el0mBg1iXafbeFMvmyld795VM1Whk1DAWMX+CxHMzqO1Mcu7CjBFF1iANkFqV3w==",
+  "success": true,
+  "projectFilePath": "E:\\My Work\\2021\\8\\PKAD-Hemo\\PKAD-Hemo\\PKAD-Hemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\micha\\.nuget\\packages\\csvhelper\\27.1.1\\csvhelper.27.1.1.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

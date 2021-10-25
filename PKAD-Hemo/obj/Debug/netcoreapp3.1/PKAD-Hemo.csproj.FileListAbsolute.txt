@@ -1,0 +1,105 @@
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.exe
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.deps.json
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.json
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.dev.json
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\App.g.cs
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.cache
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.lref
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.g.resources
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfoInputs.cache
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfo.cs
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CoreCompileInputs.cache
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CopyComplete
+D:\My Work\2021\7\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.exe
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.deps.json
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.json
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.dev.json
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\CsvHelper.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\App.g.cs
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.cache
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.lref
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.baml
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.g.resources
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.GeneratedMSBuildEditorConfig.editorconfig
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfoInputs.cache
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfo.cs
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CoreCompileInputs.cache
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CopyComplete
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+E:\KKY\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.exe
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.deps.json
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.json
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.dev.json
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\CsvHelper.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\App.g.cs
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.lref
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.baml
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.g.resources
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfoInputs.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfo.cs
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CoreCompileInputs.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CopyComplete
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.exe
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.deps.json
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.json
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.runtimeconfig.dev.json
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\CsvHelper.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\App.g.cs
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.lref
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.baml
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.g.resources
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfoInputs.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.AssemblyInfo.cs
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CoreCompileInputs.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.CopyComplete
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
