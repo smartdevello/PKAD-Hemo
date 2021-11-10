@@ -89,7 +89,6 @@ E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\System.Drawing.Com
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\App.g.cs
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo_MarkupCompile.cache
@@ -103,3 +102,4 @@ E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.C
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
+E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache

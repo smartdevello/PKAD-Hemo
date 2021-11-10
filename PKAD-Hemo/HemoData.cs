@@ -18,8 +18,11 @@ namespace PKAD_Hemo
         [Name("Name")]
         public string name { get; set; }
 
-        [Name("Image ID")]
+        [Name("Right Info")]
         public string printer_id { get; set; }
+
+        [Name("Left Info")]
+        public string left_info { get; set; }
 
         [Name("MOT")]
         public int mot { get; set; }
@@ -39,5 +42,7 @@ namespace PKAD_Hemo
 
         [Name("GONZ")]
         public double gonz { get; set; }
+
+
     }
 }

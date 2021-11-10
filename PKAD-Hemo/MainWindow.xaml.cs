@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +14,11 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using MessageBox = System.Windows.MessageBox;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace PKAD_Hemo
 {
@@ -26,6 +30,9 @@ namespace PKAD_Hemo
         private HemoRenderer hemoRenderer = null;
         private HemoManager hemoManager = null;
         private int currentChartIndex = 0;
+        string exportFolderPath = "";
+
+
         public MainWindow()
         {
 
@@ -67,7 +74,7 @@ namespace PKAD_Hemo
                 }
 
                 gapCount = 2;
-                Application.Current.MainWindow.Width = 1200 + 270 * gapCount;
+                System.Windows.Application.Current.MainWindow.Width = 1200 + 270 * gapCount;
 
                 
             }           
@@ -88,18 +95,21 @@ namespace PKAD_Hemo
                 if (hemoManager == null) hemoManager = new HemoManager(openFileDialog.FileName);
                 else hemoManager.setInputfile(openFileDialog.FileName);
 
-                List<HemoData> data = hemoManager.readData();
+                List<HemoData> data = hemoManager.readData();                
                 csvFilepath.Text = openFileDialog.FileName;
-
+                csvFilepath.Width = 1000;
                 if (data != null)
                 {
                     Dictionary<string, int> printers = new Dictionary<string, int>();
+                    Dictionary<string, int> left_info_dic = new Dictionary<string, int>();
                     List<HemoData> sorted = new List<HemoData>();
                     sorted = data.OrderByDescending(i => i.ied).ThenByDescending(i => i.got).ToList();
 
                     foreach (var item in sorted)
                     {
                         if (string.IsNullOrEmpty(item.printer_id)) continue;
+                        if (item.printer_id == "0") continue;
+
                         if (printers.ContainsKey(item.printer_id))
                         {
                             printers[item.printer_id]++;
@@ -107,7 +117,22 @@ namespace PKAD_Hemo
                         else printers[item.printer_id] = 1;
 
                     }
-                    hemoRenderer.setChatData(sorted, printers);
+                    
+                    foreach(var item in data)
+                    {
+                        if (string.IsNullOrEmpty(item.left_info)) continue;
+                        string[] words = item.left_info.Split(' ');
+                        if (words.Length != 2) continue;
+                        if (!Regex.IsMatch(words[1], @"^[a-zA-Z]+$")) continue;
+
+                        if (left_info_dic.ContainsKey(words[1]))
+                        {
+                            left_info_dic[words[1]]++;
+                        }
+                        else left_info_dic[words[1]] = 1;
+
+                    }
+                    hemoRenderer.setChatData(sorted, printers, left_info_dic);
 
                     currentChartIndex = 0;
                     seeNext.Visibility = Visibility.Hidden;
@@ -136,19 +161,96 @@ namespace PKAD_Hemo
         }
         private void btnExportChart_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Image file (*.png)|*.png";
-            //saveFileDialog.Filter = "Image file (*.png)|*.png|PDF file (*.pdf)|*.pdf";
-            if (saveFileDialog.ShowDialog() == true)
+
+
+            if (hemoRenderer == null)
             {
-                SaveControlImage(HemoChart, saveFileDialog.FileName);
+                hemoRenderer = new HemoRenderer((int)myCanvas.ActualWidth, (int)myCanvas.ActualHeight);
             }
+            if (hemoRenderer.getPrintersCount() > 0)
+            {
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Image file (*.png)|*.png";
+                //saveFileDialog.Filter = "Image file (*.png)|*.png|PDF file (*.pdf)|*.pdf";
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    string filename = saveFileDialog.FileName;
+                    exportFolderPath = saveFileDialog.FileName;
+
+                    BackgroundWorker worker = new BackgroundWorker();
+                    worker.WorkerReportsProgress = true;
+                    worker.DoWork += worker_DoExport;
+                    worker.ProgressChanged += worker_ProgressChanged;
+                    worker.RunWorkerAsync();
+                    worker.RunWorkerCompleted += worker_CompletedWork;
+
+                }
+
+            }
+
+
+        }
+        private void SaveBitmapImagetoFile(BitmapImage image, string filePath)
+        {
+            //PngBitmapEncoder encoder1 = new PngBitmapEncoder();
+            //encoder1.Frames.Add(BitmapFrame.Create(image));
+
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(image));
+
+            try
+            {
+                using (var fileStream = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
+                {
+                    encoder.Save(fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+        }
+        void worker_DoExport(object sender, DoWorkEventArgs e)
+        {
+            int chartCount = getChartCount();
+            for (int index =0; index < chartCount; index++)
+            {
+                hemoRenderer.draw(index);
+
+                string filename = exportFolderPath.Substring(0, exportFolderPath.Length - 4) + "-" + index.ToString() + ".png";
+                SaveBitmapImagetoFile(BmpImageFromBmp(hemoRenderer.getBmp()), filename);
+            }
+
+        }
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+        }
+        void worker_CompletedWork(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string msg = "Exporting has been done\n";
+            MessageBox.Show(msg);
+        }
+
+        private int getChartCount()
+        {
+            int printerCount = hemoRenderer.getPrintersCount();
+
+            int chartCount = 1;
+            printerCount = printerCount - 40;
+            if (printerCount > 0)
+            {
+                chartCount = printerCount / 140 + 2;
+                if (printerCount % 140 == 0) chartCount--;
+            }
+            return chartCount;
         }
         private void drawPreviousChart(object sender, RoutedEventArgs e)
         {
-            int printerCount = hemoRenderer.getPrintersCount();
-            int chartCount = (printerCount - 40) / 100 + 1;
-            if ((printerCount - 40) % 100 != 0) chartCount++;
+
+            int chartCount = getChartCount();
 
             currentChartIndex--;
 
@@ -172,10 +274,8 @@ namespace PKAD_Hemo
         }
         private void drawNextChart(object sender, RoutedEventArgs e)
         {
-            int printerCount = hemoRenderer.getPrintersCount();
-            int chartCount = (printerCount - 40) / 100 + 1;
-            if ((printerCount - 40) % 100 != 0) chartCount++;
 
+            int chartCount = getChartCount();
             currentChartIndex++;
 
             if (currentChartIndex == 0)

@@ -15,9 +15,15 @@ namespace PKAD_Hemo
         private Graphics gfx = null;
         private List<HemoData> data = null;
         private Dictionary<string, int> printers = null;
+        private Dictionary<string, int> left_info_dict = null;
         Image logoImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "logo.png"));
         Image redFingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "red_finger.png"));
         Image yellowFingerImg = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "yellow_finger.png"));
+        Image img14 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "14.png"));
+        Image img_percent_100 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-100.png"));
+        Image img_percent_70 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-70.png"));
+        Image img_percent_40 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-40.png"));
+
         public HemoRenderer(int width, int height)
         {
             this.width = width;
@@ -43,10 +49,11 @@ namespace PKAD_Hemo
             return this.data;
         }
 
-        public void setChatData(List<HemoData> data, Dictionary<string, int> pp)
+        public void setChatData(List<HemoData> data, Dictionary<string, int> pp, Dictionary<string, int> qq)
         {
             this.data = data;
             this.printers = pp;
+            this.left_info_dict = qq;
         }
 
 
@@ -141,6 +148,56 @@ namespace PKAD_Hemo
             drawBrush.Dispose();
 
         }
+        public void drawPie(Color color, Point o, Size size, float startAngle, float sweepAngle, string content = "")
+        {
+            // Create location and size of ellipse.
+            double px = height / totHeight;
+            size.Width = (int)(size.Width * px);
+            size.Height = (int)(size.Height * px);
+
+            Rectangle rect = new Rectangle(convertCoord(o), size);
+            // Draw pie to screen.            
+            Brush grayBrush = new SolidBrush(color);
+            gfx.FillPie(grayBrush, rect, startAngle, sweepAngle);
+
+            o.X += size.Width / 2;
+            o.Y -= size.Height / 3;
+            float radius = size.Width * 0.3f;
+            o.X += (int)(radius * Math.Cos(Helper.DegreesToRadians(startAngle + sweepAngle / 2)));
+            o.Y -= (int)(radius * Math.Sin(Helper.DegreesToRadians(startAngle + sweepAngle / 2)));
+            if (!string.IsNullOrEmpty(content))
+            {
+                int percent = (int)(sweepAngle * 100.0f / 360.0f);
+                content = percent.ToString() + "%";
+                Font numberFont = new Font("Arial", 20, FontStyle.Bold, GraphicsUnit.Point);
+                drawCenteredString(content, new Rectangle(o.X, o.Y, size.Width / 2 + 50, 50), Brushes.White, numberFont);
+                numberFont.Dispose();
+            }
+
+        }
+        public void drawCenteredString_withBorder(string content, Rectangle rect, Brush brush, Font font, Color borderColor)
+        {
+
+            //using (Font font1 = new Font("Arial", fontSize, FontStyle.Bold, GraphicsUnit.Point))
+
+            // Create a StringFormat object with the each line of text, and the block
+            // of text centered on the page.
+            double px = height / totHeight;
+            rect.Location = convertCoord(rect.Location);
+            rect.Width = (int)(px * rect.Width);
+            rect.Height = (int)(px * rect.Height);
+
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
+
+            // Draw the text and the surrounding rectangle.
+            gfx.DrawString(content, font, brush, rect, stringFormat);
+
+            Pen borderPen = new Pen(new SolidBrush(borderColor), 15);
+            gfx.DrawRectangle(borderPen, rect);
+            borderPen.Dispose();
+        }
         public void draw(int currentChartIndex)
         {
             if (bmp == null)
@@ -180,6 +237,8 @@ namespace PKAD_Hemo
             Font percentFont = new Font("Arial", 21, FontStyle.Bold, GraphicsUnit.Point);
             int pot_got = 0, pot = 0, mot = 0, got = 0, ied = 0;
             double gop = 0, gonz = 0;
+            int images_count = 0;
+            
             foreach (var item in data)
             {
                 pot_got += item.pot - item.got;
@@ -190,242 +249,182 @@ namespace PKAD_Hemo
                 gop += item.gop;
                 gonz += item.gonz;
 
+                if (item.got != 0 || item.ied != 0) images_count++;
+
             }
-            var sorted_printers = printers.OrderByDescending(o => o.Value);
+
+            var sorted_printers = printers.OrderByDescending(o => o.Value);            
+
             if (currentChartIndex == 0)
             {
+                //drawCenteredString(pot_got.ToString(), new Rectangle(-20, 900, 200, 70), Brushes.Black, numberFont);
+                //drawCenteredString("Potential Ovals\nTo Have Issues", new Rectangle(-20, 830, 200, 70), Brushes.Black, textFont);
 
-
-                drawCenteredString(pot_got.ToString(), new Rectangle(-20, 900, 200, 70), Brushes.Black, numberFont);
-                drawCenteredString("Potential Ovals\nTo Have Issues", new Rectangle(-20, 830, 200, 70), Brushes.Black, textFont);
-
-                drawCenteredString(ied.ToString(), new Rectangle(-20, 700, 200, 70), Brushes.Black, numberFont);
-                drawCenteredString("OVER VOTE\nPOTENTIAL", new Rectangle(-20, 630, 200, 70), Brushes.Black, textFont);
+                //drawCenteredString(ied.ToString(), new Rectangle(-20, 700, 200, 70), Brushes.Black, numberFont);
+                //drawCenteredString("OVER VOTE\nPOTENTIAL", new Rectangle(-20, 630, 200, 70), Brushes.Black, textFont);
 
 
 
                 numberFont.Dispose();
-                numberFont = new Font("Arial", 35, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+                numberFont = new Font("Arial", 30, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
 
 
 
-                drawCenteredString(pot.ToString(), new Rectangle(800, 850, 150, 70), Brushes.Black, numberFont);
-                drawCenteredString("Potential\nOval Totals", new Rectangle(800, 780, 150, 70), Brushes.Black, textFont);
+                drawCenteredString(pot.ToString(), new Rectangle(750, 900, 180, 70), Brushes.Black, numberFont);
+                drawCenteredString("Potential\nOval Totals", new Rectangle(750, 830, 180, 70), Brushes.Black, textFont);
 
-                drawCenteredString(mot.ToString(), new Rectangle(950, 850, 150, 70), Brushes.Black, numberFont);
-                drawCenteredString("Voted\nOval Totals", new Rectangle(950, 780, 150, 70), Brushes.Black, textFont);
+                drawCenteredString(mot.ToString(), new Rectangle(930, 900, 170, 70), Brushes.Black, numberFont);
+                drawCenteredString("Voted\nOval Totals", new Rectangle(930, 830, 170, 70), Brushes.Black, textFont);
 
-                drawCenteredString(data.Count.ToString(), new Rectangle(1100, 850, 150, 70), Brushes.Black, numberFont);
-                drawCenteredString("Files\nExamined", new Rectangle(1100, 780, 150, 70), Brushes.Black, textFont);
+                drawCenteredString(data.Count.ToString(), new Rectangle(1100, 900, 150, 70), Brushes.Black, numberFont);
+                drawCenteredString("Files\nExamined", new Rectangle(1100, 830, 150, 70), Brushes.Black, textFont);
 
 
+
+                //////////////////Draw Pie/////////////////////////////////////
+                ///
+
+                int tot_left_info = 0;
+                for (int i = 0; i< left_info_dict.Count(); i++)
+                {
+                    tot_left_info += left_info_dict.ElementAt(i).Value;
+                }
+                var sorted_left_info_dict = left_info_dict.OrderByDescending(o => o.Value);
+                if (tot_left_info !=0)
+                {
+                    float startAngle = 270.0f, sweepAngle = 0;
+                    Color[] colors = new Color[]
+                    {
+                        Color.BlueViolet,
+                        Color.DarkSlateBlue,
+                        Color.SlateBlue,
+                        Color.MediumSlateBlue,
+                        Color.MediumPurple
+                    };
+                    int colorexplainerY = 600, colorexplainerX = 1000;
+                    for (int i = 0; i< Math.Min(sorted_left_info_dict.Count(), 5); i++)
+                    {
+                        sweepAngle = 360 * sorted_left_info_dict.ElementAt(i).Value / (float)tot_left_info;
+                        if (i == 0)
+                            drawPie(colors[i], new Point(780, 750), new Size(200, 200), startAngle, sweepAngle, "draw percent");
+                        else drawPie(colors[i], new Point(780, 750), new Size(200, 200), startAngle, sweepAngle, "");
+                        startAngle = startAngle + sweepAngle;
+
+                        fillRectangle(colors[i], new Rectangle(colorexplainerX, colorexplainerY + i * 20, 15, 15));
+                        int explainer_percent = (int)( sorted_left_info_dict.ElementAt(i).Value * 100 / tot_left_info);
+                        string explainer_content = sorted_left_info_dict.ElementAt(i).Key + " " + explainer_percent.ToString() + "%";
+                        drawString(new Point(colorexplainerX + 30, colorexplainerY + i * 20), explainer_content, 10);
+                    }
+                }
+
+                /////////////////////////////Draw 14 Icon part////////////////////////////
+                ///
+                //new Rectangle(1100, 830, 150, 70)
+                drawImg(img14, new Point(1120, 770), new Size(100, 100));
+                Font newNumberfont  = new Font("Arial", 35, FontStyle.Bold, GraphicsUnit.Point);
+                drawCenteredString_withBorder(images_count.ToString(), new Rectangle(1120, 660, 100, 100), Brushes.Black, newNumberfont, Color.Red);
+                if (images_count != 0)
+                    drawImg(redFingerImg, new Point(1220, 650), new Size(100, 100));
+                newNumberfont.Dispose();
+
+                /////////////////////////////////////////////////////////////
 
                 textFont.Dispose();
                 numberFont.Dispose();
 
-                //Draw Big Chart
-                textFont = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Point);
-                numberFont = new Font("Arial", 25, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
-
-
-
-                for (int x = 200; x <= 600; x += 80)
-                {
-                    drawLine(new Point(x, 900), new Point(x, 540), Color.Gray);
-                }
-
-                int mxEval = Math.Max(mot, got);
-                mxEval = ((mxEval / 25) + 1) * 25;
-
-                int step = mxEval / 5, xscale = 0;
-                for (int x = 160; x <= 560; x += 80)
-                {
-                    drawCenteredString(xscale.ToString(), new Rectangle(x, 540, 80, 20), Brushes.Black, scaleFont);
-                    xscale += step;
-                }
-
-                int rWidth = 0;
-                rWidth = (int)(400 * mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(200, 900, rWidth, 80));
-
-                rWidth = (int)(400 * got / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(200, 810, rWidth, 80));
-                drawCenteredString(string.Format("{0}%", Math.Round(got * 100 / (double)mot, 2)), new Rectangle(550, 810, 150, 80), Brushes.BlueViolet, percentFont);
-                if (got != 0)
-                {
-                    drawImg(yellowFingerImg, new Point(670, 850), new Size(80, 80));
-                }
-
-                drawString(new Point(170, 820), "G/M", 8);
-
-                rWidth = (int)(400 * mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(200, 710, rWidth, 80));
-                rWidth = (int)(400 * ied / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(200, 620, rWidth, 80));
-                drawCenteredString(string.Format("{0}%", Math.Round(ied * 100 / (double)mot, 2)), new Rectangle(550, 620, 150, 80), Brushes.BlueViolet, percentFont);
-
-                if (ied != 0)
-                {
-                    drawImg(redFingerImg, new Point(670, 670), new Size(80, 80));
-                }
-
-                drawString(new Point(170, 630), "IDE/M", 8);
-
-
-
-                ////Worst Instance
-                percentFont.Dispose();
-                percentFont = new Font("Arial", 15, FontStyle.Bold, GraphicsUnit.Point);
-
-                drawCenteredString("Worst Instance", new Rectangle(-20, 500, 500, 100), Brushes.Black, titleFont);
-                drawCenteredString(data[0].got.ToString(), new Rectangle(-20, 400, 100, 50), Brushes.Black, numberFont);
-                drawCenteredString("Potential\nOvals To\nHave\nIssues", new Rectangle(-20, 360, 100, 100), Brushes.Black, textFont);
-                drawCenteredString(data[0].ied.ToString(), new Rectangle(-20, 260, 100, 50), Brushes.Black, numberFont);
-                drawCenteredString("OVER\nVOTE\nPOTENTIAL", new Rectangle(-20, 230, 100, 100), Brushes.Black, textFont);
-
-                mxEval = Math.Max(data[0].got, data[0].mot);
-                mxEval = ((mxEval / 25) + 1) * 25;
-                for (int x = 100; x <= 350; x += 50)
-                {
-                    drawLine(new Point(x, 400), new Point(x, 150), Color.Gray);
-                }
-
-                xscale = 0;
-                step = mxEval / 5;
-
-                for (int x = 75; x <= 325; x += 50)
-                {
-                    drawCenteredString(xscale.ToString(), new Rectangle(x, 150, 50, 20), Brushes.Black, scaleFont);
-                    xscale += step;
-                }
-                rWidth = (int)(250 * data[0].mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(100, 400, rWidth, 50));
-
-                rWidth = (int)(250 * data[0].got / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(100, 340, rWidth, 50));
-                drawCenteredString(string.Format("{0}%", Math.Round(data[0].got * 100 / (double)data[0].mot, 2)), new Rectangle(300, 340, 125, 50), Brushes.BlueViolet, percentFont);
-
-                drawString(new Point(70, 350), "G/M", 8);
-
-                rWidth = (int)(250 * data[0].mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(100, 280, rWidth, 50));
-
-                rWidth = (int)(250 * data[0].ied / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(100, 220, rWidth, 50));
-                drawCenteredString(string.Format("{0}%", Math.Round(data[0].ied * 100 / (double)data[0].mot, 2)), new Rectangle(300, 220, 125, 50), Brushes.BlueViolet, percentFont);
-                drawString(new Point(70, 230), "IDE/M", 8);
-
-                if (sorted_printers.Count() >=100 || data[0].ied !=0)
-                {
-                    drawImg(redFingerImg, new Point(350, 150), new Size(100, 100));
-                }
-
-                //Average Instance
-                double avgot = got / (double)data.Count;
-                double avmot = mot / (double)data.Count;
-                double avied = ied / (double)data.Count;
-
-
-                drawCenteredString("Average Instance", new Rectangle(430, 500, 500, 100), Brushes.Black, titleFont);
-                drawCenteredString(string.Format("{0}", Math.Round(avgot, 2)), new Rectangle(430, 400, 150, 50), Brushes.Black, numberFont);
-                drawCenteredString("Potential\nOvals To\nHave\nIssues", new Rectangle(430, 360, 150, 100), Brushes.Black, textFont);
-
-                drawCenteredString(string.Format("{0}", Math.Round(avied, 1)), new Rectangle(430, 260, 150, 50), Brushes.Black, numberFont);
-                drawCenteredString("OVER\nVOTE\nPOTENTIAL", new Rectangle(430, 230, 150, 100), Brushes.Black, textFont);
-
-                mxEval = (int)Math.Max(avgot, avmot);
-                mxEval = ((mxEval / 25) + 1) * 25;
-                step = mxEval / 5;
-
-                for (int x = 600; x <= 850; x += 50)
-                {
-                    drawLine(new Point(x, 400), new Point(x, 150), Color.Gray);
-                }
-
-                xscale = 0;
-                for (int x = 575; x <= 825; x += 50)
-                {
-                    drawCenteredString(xscale.ToString(), new Rectangle(x, 150, 50, 20), Brushes.Black, scaleFont);
-                    xscale += step;
-                }
-
-                rWidth = (int)(250 * avmot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(600, 400, rWidth, 50));
-                rWidth = (int)(250 * avgot / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(600, 340, rWidth, 50));
-                drawCenteredString(string.Format("{0}%", Math.Round(got * 100 / (double)mot, 2)), new Rectangle(800, 340, 125, 50), Brushes.BlueViolet, percentFont);
-
-                drawString(new Point(570, 350), "G/M", 8);
-
-                rWidth = (int)(250 * avmot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(600, 280, rWidth, 50));
-                rWidth = (int)(250 * avied / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(600, 220, rWidth, 50));
-                drawCenteredString(string.Format("{0}%", Math.Round(ied * 100 / (double)mot, 2)), new Rectangle(800, 220, 125, 50), Brushes.BlueViolet, percentFont);
-                drawString(new Point(570, 230), "IDE/M", 8);
-
-                if (sorted_printers.Count() >= 100|| ied != 0)
-                {
-                    drawImg(redFingerImg, new Point(800, 150), new Size(100, 100));
-                }
-
-
-                //Least Instance
-                int leastInd = data.Count - 1;
-                drawCenteredString("Least Instance", new Rectangle(900, 500, 500, 100), Brushes.Black, titleFont);
-                drawCenteredString(data[leastInd].got.ToString(), new Rectangle(900, 400, 150, 50), Brushes.Black, numberFont);
-                drawCenteredString("Potential\nOvals To\nHave\nIssues", new Rectangle(900, 360, 150, 100), Brushes.Black, textFont);
-
-                drawCenteredString(data[leastInd].ied.ToString(), new Rectangle(900, 260, 150, 50), Brushes.Black, numberFont);
-                drawCenteredString("OVER\nVOTE\nPOTENTIAL", new Rectangle(900, 230, 150, 100), Brushes.Black, textFont);
-
-                mxEval = Math.Max(data[leastInd].got, data[leastInd].mot);
-                mxEval = ((mxEval / 25) + 1) * 25;
-                for (int x = 1050; x <= 1300; x += 50)
-                {
-                    drawLine(new Point(x, 400), new Point(x, 150), Color.Gray);
-                }
-
-
-                xscale = 0;
-                step = mxEval / 5;
-                for (int x = 1025; x <= 1275; x += 50)
-                {
-                    drawCenteredString(xscale.ToString(), new Rectangle(x, 150, 50, 20), Brushes.Black, scaleFont);
-                    xscale += step;
-                }
-
-                rWidth = (int)(250 * data[leastInd].mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(1050, 400, rWidth, 50));
-
-                rWidth = (int)(250 * data[leastInd].got / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(1050, 340, rWidth, 50));
+                numberFont =  new Font("Arial", 35, FontStyle.Bold , GraphicsUnit.Point);
+                textFont = new Font("Arial", 20, FontStyle.Bold, GraphicsUnit.Point);
+                drawCenteredString(mot.ToString(), new Rectangle(0, 900, 300, 100), Brushes.Black, numberFont);
+                drawCenteredString("Total Number of\nHand Cast\nOvals", new Rectangle(0, 800, 300, 100), Brushes.Black, textFont);
 
                 double percent = 0;
-                if (data[leastInd].mot != 0) percent = data[leastInd].got * 100 / (double)data[leastInd].mot;
-                else percent = 0;
+                percent = Math.Round(got * 100 / (double)mot, 3);
+                
+                drawCenteredString(percent.ToString() + "%", new Rectangle(300, 900, 300, 100), Brushes.Red, numberFont);
+                if (percent != 0)
+                    drawImg(yellowFingerImg, new Point(600, 900), new Size(100, 100));
 
-                drawCenteredString(string.Format("{0}%", Math.Round(percent, 2)), new Rectangle(1230, 340, 125, 50), Brushes.BlueViolet, percentFont);
-                drawString(new Point(1020, 350), "G/M", 8);
+                drawCenteredString("Of Total Votes\nCompromised", new Rectangle(300, 800, 300, 70), Brushes.Black, textFont);
 
-                rWidth = (int)(250 * data[leastInd].mot / (double)mxEval);
-                fillRectangle(Color.Black, new Rectangle(1050, 280, rWidth, 50));
 
-                rWidth = (int)(250 * data[leastInd].ied / (double)mxEval);
-                fillRectangle(Color.Red, new Rectangle(1050, 220, rWidth, 50));
+                drawCenteredString(got.ToString(), new Rectangle(0, 700, 300, 100), Brushes.Red, numberFont);
+                if (got != 0)
+                    drawImg(yellowFingerImg, new Point(200, 750), new Size(100, 100));
 
-                if (data[leastInd].mot != 0) percent = data[leastInd].ied * 100 / (double)data[leastInd].mot;
-                else percent = 0;
+                drawCenteredString("Number of\nBleed Through\nVotes", new Rectangle(0, 600, 300, 100), Brushes.Black, textFont);
 
-                drawCenteredString(string.Format("{0}%", Math.Round(percent, 2)), new Rectangle(1230, 220, 125, 50), Brushes.BlueViolet, percentFont);
-                drawString(new Point(1020, 230), "IDE/M", 8);
+                percent = Math.Round(ied * 100 / (double)data.Count, 2);
+                drawCenteredString(percent.ToString() + "%", new Rectangle(300, 700, 300, 100), Brushes.Red, numberFont);
+                drawCenteredString("Forced\nAdjudication\nRate", new Rectangle(300, 600, 300, 100), Brushes.Black, textFont);
+                if (percent != 0)
+                    drawImg(redFingerImg, new Point(580, 600), new Size(100, 100));
 
-                if (sorted_printers.Count() >= 100 || percent != 0)
+                drawCenteredString("Ballot Type Ratio", new Rectangle(750, 540, 300, 50), Brushes.Black, textFont);
+
+                fillRectangle(Color.Red, new Rectangle(0, 480, 1300, 50));
+                drawCenteredString("ANALYSIS OF BALLOTS DISPLAYING BLEED THROUGH VOTES", new Rectangle(0, 480, 1300, 50), Brushes.White, textFont);
+
+                int max_got = 0, max_got_index = 0;
+                for (int i = 0; i< data.Count; i++)
                 {
-                    drawImg(redFingerImg, new Point(1200, 150), new Size(100, 100));
+                    if (data[i].got > max_got)
+                    {
+                        max_got = data[i].got;
+                        max_got_index = i;
+
+                    }
                 }
 
+                drawCenteredString("Ballot Most\nCompromised", new Rectangle(0, 400, 300, 80), Brushes.Black, textFont);
+                drawCenteredString(data[max_got_index].gop.ToString() + "%", new Rectangle(0, 330, 300, 100), Brushes.Red, numberFont);
+                percent = Math.Round(data[max_got_index].gop / 100, 2); 
+                drawCenteredString(percent.ToString() + " Bleeds Per\nHand Cast Vote", new Rectangle(0, 230, 300, 80), Brushes.Black, textFont);
+                drawCenteredString(data[max_got_index].mot.ToString() + "%", new Rectangle(0, 170, 300, 100), Brushes.Red, numberFont);
+                drawCenteredString("Over Vote Conflict", new Rectangle(0, 110, 300, 80), Brushes.Black, textFont);
 
+
+                drawCenteredString("Over Vote Ratio\nCreated By Bleed\nThrough Votets", new Rectangle(300, 400, 300, 100), Brushes.Black, textFont);
+                percent = Math.Round(ied * 100 / (double)got, 2);
+                drawCenteredString(percent.ToString() + "%", new Rectangle(300, 300, 300, 100), Brushes.Red, numberFont);
+
+                if (percent !=0)
+                {
+                    drawImg(redFingerImg, new Point(400, 200), new Size(120, 120));
+                }
+
+                drawCenteredString("Worst\nOver Vote Ratio\nCreated By Bleed\nThrough Votes", new Rectangle(700, 400, 300, 130), Brushes.Black, textFont);
+                drawCenteredString(data[max_got_index].mot.ToString() + "%", new Rectangle(700, 270, 300, 100), Brushes.Red, numberFont);
+
+                if (data[max_got_index].mot != 0)
+                {
+                    drawImg(redFingerImg, new Point(800, 200), new Size(120, 120));
+                }
+                double max_gop = 0;
+                foreach(var item in data)
+                {
+                    if (item.gop > max_gop) max_gop = item.gop;
+                }
+                drawCenteredString("Worst\nBleed Through\nRatio", new Rectangle(1000, 400, 300, 100), Brushes.Black, textFont);
+                drawCenteredString(max_gop.ToString() + "%", new Rectangle(980, 300, 300, 80), Brushes.Red, numberFont);
+
+                percent = max_gop / 100;
+                
+                if (max_gop % 100 == 0)
+                    drawCenteredString(Math.Round(percent).ToString() + " Bleeds\nThrough Votes\nPer Hand Cast\nVote", new Rectangle(1000, 200, 300, 150), Brushes.Black, textFont);
+                else 
+                    drawCenteredString(Math.Round(percent, 2).ToString() + " Bleeds\nThrough Votes\nPer Hand Cast\nVote", new Rectangle(1000, 200, 300, 150), Brushes.Black, textFont);
+
+
+                if (percent >= 0.9)
+                {
+                    drawImg(img_percent_100, new Point(1220, 250), new Size(100, 70));
+                } else if (percent >= 0.5)
+                {
+                    drawImg(img_percent_70, new Point(1220, 250), new Size(100, 70));
+                } else
+                {
+                    drawImg(img_percent_40, new Point(1220, 250), new Size(100, 70));
+                }
 
 
                 //Draw Printers

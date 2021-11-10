@@ -5,7 +5,7 @@
   },
   "projects": {
     "E:\\My Work\\2021\\8\\PKAD-Hemo\\PKAD-Hemo\\PKAD-Hemo.csproj": {
-      "version": "2.4.0",
+      "version": "3.23.0",
       "restore": {
         "projectUniqueName": "E:\\My Work\\2021\\8\\PKAD-Hemo\\PKAD-Hemo\\PKAD-Hemo.csproj",
         "projectName": "PKAD-Hemo",
@@ -69,7 +69,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App.WPF": {
+            "Microsoft.WindowsDesktop.App": {
               "privateAssets": "none"
             }
           },

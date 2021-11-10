@@ -5,8 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>PKAD_Hemo</RootNamespace>
     <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>hnet.com-image.ico</ApplicationIcon>
-    <Version>2.4</Version>
+    <Version>3.23</Version>
   </PropertyGroup>
 
   <ItemGroup>
