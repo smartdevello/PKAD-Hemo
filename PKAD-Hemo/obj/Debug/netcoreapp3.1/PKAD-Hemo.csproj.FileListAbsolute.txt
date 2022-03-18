@@ -103,3 +103,4 @@ E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.dll
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.pdb
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.genruntimeconfig.cache
 E:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.csproj.AssemblyReference.cache
+D:\My Work\2021\8\PKAD-Hemo\PKAD-Hemo\obj\Debug\netcoreapp3.1\PKAD-Hemo.GeneratedMSBuildEditorConfig.editorconfig

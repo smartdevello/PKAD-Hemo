@@ -23,11 +23,17 @@ namespace PKAD_Hemo
         Image img_percent_100 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-100.png"));
         Image img_percent_70 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-70.png"));
         Image img_percent_40 = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "assets", "percent-40.png"));
+        private Dictionary<int, Color> colorDic = null;
+
 
         public HemoRenderer(int width, int height)
         {
             this.width = width;
             this.height = height;
+            for (int i = 0; i< 100; i++)
+            {
+                Random rnd = new Random();
+            }
 
         }
         public void setRenderSize(int width, int height)
@@ -54,6 +60,25 @@ namespace PKAD_Hemo
             this.data = data;
             this.printers = pp;
             this.left_info_dict = qq;
+
+            colorDic = new Dictionary<int, Color>();
+
+            var sorted_printers = printers.OrderByDescending(o => o.Value);
+            int prev_cnt = 0;
+            Random rnd = new Random();
+
+
+            for (int i = 0; i < sorted_printers.Count(); i++)
+            {
+                if (sorted_printers.ElementAt(i).Value != prev_cnt)
+                {
+                    prev_cnt = sorted_printers.ElementAt(i).Value;
+                    if (!colorDic.ContainsKey(prev_cnt))
+                    {
+                        colorDic[prev_cnt] = Color.FromArgb(rnd.Next(0, 200), rnd.Next(0, 200), rnd.Next(0, 200));
+                    }
+                }
+            }
         }
 
 
@@ -446,11 +471,19 @@ namespace PKAD_Hemo
                 }
 
                 float percentage;
+                int preValue = 0;
+                Color color = Color.Black;
                 for (int i = 0; i < Math.Min(40, sorted_printers.Count()); i++)
                 {
-                    drawString(new Point(1350 + width_gap * (i / 20), 750 - height_gap * (i % 20)), sorted_printers.ElementAt(i).Key, 8);
+                    if (sorted_printers.ElementAt(i).Value != preValue)
+                    {
+                        preValue = sorted_printers.ElementAt(i).Value;
+                        color = colorDic[preValue];
+                    }
+
+                    drawString(colorDic[preValue], new Point(1350 + width_gap * (i / 20), 750 - height_gap * (i % 20)), sorted_printers.ElementAt(i).Key, 8);
                     percentage = sorted_printers.ElementAt(i).Value * 100 / (float)data.Count;
-                    drawPercentageLine(percentage, 1500 + width_gap * (i / 20), 750 - height_gap * (i % 20));
+                    drawPercentageLine(percentage, 1500 + width_gap * (i / 20), 750 - height_gap * (i % 20), colorDic[preValue]);
                 }
             } else
             {
@@ -476,13 +509,19 @@ namespace PKAD_Hemo
                 titleFont = new Font("Arial", 40, FontStyle.Bold, GraphicsUnit.Point);
 
                 float percentage;
+                int preValue = 0;
+                Color color = new Color();
                 for (int i = 40 + 140 * (currentChartIndex - 1); i < Math.Min(sorted_printers.Count(), 40 + 140 * currentChartIndex); i++)
                 {
-                    int j = i - 40 - 140 * (currentChartIndex - 1);
+                    if (sorted_printers.ElementAt(i).Value != preValue)
+                    {
+                        preValue = sorted_printers.ElementAt(i).Value;
+                    }
 
-                    drawString(new Point( width_gap * (j / 20), 750 - height_gap * (j % 20)), sorted_printers.ElementAt(i).Key, 8);
+                    int j = i - 40 - 140 * (currentChartIndex - 1);
+                    drawString(colorDic[preValue], new Point( width_gap * (j / 20), 750 - height_gap * (j % 20)), sorted_printers.ElementAt(i).Key, 8);
                     percentage = sorted_printers.ElementAt(i).Value * 100 / (float)data.Count;
-                    drawPercentageLine(percentage, 150 + width_gap * (j / 20), 750 - height_gap * (j % 20));
+                    drawPercentageLine(percentage, 150 + width_gap * (j / 20), 750 - height_gap * (j % 20), colorDic[preValue]);
                 }
             }
 
@@ -493,11 +532,11 @@ namespace PKAD_Hemo
             percentFont.Dispose();
 
         }
-        private void drawPercentageLine(float percent, int X, int Y)
+        private void drawPercentageLine(float percent, int X, int Y, Color color)
         {
-            fillRectangle(Color.Black, new Rectangle(X, Y, 20, 20));
-            fillRectangle(Color.Black, new Rectangle(X + 80, Y, 20, 20));
-            drawLine(new Point(X, Y - 10), new Point(X + 80, Y - 10), Color.Black, 4);
+            fillRectangle(color, new Rectangle(X, Y, 20, 20));
+            fillRectangle(color, new Rectangle(X + 80, Y, 20, 20));
+            drawLine(new Point(X, Y - 10), new Point(X + 80, Y - 10), color, 4);
             if (percent != 0.0F)
             {
                 drawString(new Point(X + 30, Y + 10), string.Format("{0:F}%", percent), 8);

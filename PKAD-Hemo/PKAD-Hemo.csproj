@@ -7,7 +7,7 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>hnet.com-image.ico</ApplicationIcon>
-    <Version>3.23</Version>
+    <Version>3.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
